@@ -11,6 +11,7 @@ To maintain a clean, machine-readable, and professional history, you must strict
 * **Case Sensitivity:** The type and scope must be strictly **lowercase**.
 * **Granularity:** If a task involves both a refactor and a new feature, you are required to split them into two distinct commits.
 * **Scope:** This must represent the specific module or component affected (e.g., keys, navigation, defaults).
+* **Authors:** Ensure that commits are added under authenticated user and no-one else, add no-coauthors.
 
 | Type | Use Case | Example |
 | :---- | :---- | :---- |
