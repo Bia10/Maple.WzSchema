@@ -1,0 +1,323 @@
+namespace Maple.WzSchema;
+
+/// <summary>
+/// WZ property descriptors for Mob.wz/{id:D7}.img/ nodes.
+/// Nested classes mirror the WZ node hierarchy.
+/// </summary>
+public static class MobKeys
+{
+    // Root node names for Mob archive navigation
+    public const string Root = "Mob";
+    public const string RootImg = "Mob.img";
+
+    // Etc.wz node names for mob supplementary data
+    public const string MobLocation = "MobLocation";
+    public const string RewardItem = "RewardItem";
+
+    // Sprite action fallback sequence
+    public static readonly string[] ActionFallbacks =
+    [
+        "stand",
+        "stand1",
+        "stand2",
+        "move",
+        "move1",
+        "move2",
+        "fly",
+        "hit1",
+        "die1",
+        "attack1",
+        "chase",
+        "regen",
+    ];
+
+    public const string ActionMove = "move";
+    public const string ActionFly = "fly";
+    public const string ActionJump = "jump";
+
+    /// <summary>
+    /// Standard mob animation action keys as a nested class.
+    /// Mirrors the root-level <c>ActionXxx</c> constants for client loader compatibility.
+    /// </summary>
+    public static class Actions
+    {
+        public const string Stand = "stand";
+        public const string Move = "move";
+        public const string Attack1 = "attack1";
+        public const string Attack2 = "attack2";
+        public const string Hit1 = "hit1";
+        public const string Hit2 = "hit2";
+        public const string Die1 = "die1";
+        public const string Die2 = "die2";
+        public const string Jump = "jump";
+        public const string Fly = "fly";
+        public const string Regen = "regen";
+        public const string Chase = "chase";
+        public const string Skill0 = "skill0";
+        public const string Skill1 = "skill1";
+    }
+
+    /// <summary>
+    /// Top-level action node whose <em>presence</em> sets <c>CMobTemplate::bChase = true</c> (schema §1.6).
+    /// Not an <c>info/</c> key — do not read with <c>WzPresenceFlag</c>.
+    /// </summary>
+    public const string ActionChase = "chase";
+
+    /// <summary>
+    /// Top-level action node whose <em>presence</em> sets <c>bRegenAction = true</c> (schema §1.6).
+    /// Not an <c>info/</c> key — do not read with <c>WzPresenceFlag</c>.
+    /// </summary>
+    public const string ActionRegen = "regen";
+    public const string SkillPrefix = "skill";
+
+    /// <summary>Properties under Mob.wz/{id}.img/info/</summary>
+    public static class Info
+    {
+        // ── Core Stats ────────────────────────────────────────────
+        public static readonly WzProperty<int> Level = new("level", WzDefaults.MobDefaultLevel);
+        public static readonly WzProperty<int> MaxHP = new("maxHP", 0);
+        public static readonly WzProperty<int> MaxMP = new("maxMP", 0);
+        public static readonly WzProperty<int> PADamage = new("PADamage", 0);
+        public static readonly WzProperty<int> MADamage = new("MADamage", 0);
+        public static readonly WzProperty<int> PDRate = new("PDRate", 0);
+        public static readonly WzProperty<int> MDRate = new("MDRate", 0);
+        public static readonly WzProperty<int> Acc = new("acc", 0);
+        public static readonly WzProperty<int> Eva = new("eva", 0);
+        public static readonly WzProperty<int> Exp = new("exp", 0);
+        public static readonly WzProperty<int> Speed = new("speed", 0);
+        public static readonly WzProperty<int> FlySpeed = new("flySpeed", 0);
+
+        // ── Boolean Flags (all WzPresenceFlag: nonzero = true) ───
+        public static readonly WzPresenceFlag Boss = new("boss");
+        public static readonly WzPresenceFlag Undead = new("undead");
+        public static readonly WzPresenceFlag BodyAttack = new("bodyAttack");
+        public static readonly WzPresenceFlag FirstAttack = new("firstAttack");
+        public static readonly WzPresenceFlag Invincible = new("invincible");
+        public static readonly WzPresenceFlag NotAttack = new("notAttack");
+        public static readonly WzPresenceFlag SelfDestruction = new("selfDestruction");
+        public static readonly WzPresenceFlag FirstSelfDestruction = new("firstSelfDestruction");
+        public static readonly WzPresenceFlag Disable = new("disable");
+        public static readonly WzPresenceFlag NoFlip = new("noFlip");
+
+        /// <summary>
+        /// Nonzero → mob can pick up drops. WZ key confirmed as <c>"publicReward"</c> (C++ field <c>bPickUpDrop</c>).
+        /// Earlier code incorrectly used the C++ field name <c>"pickUpDrop"</c>.
+        /// </summary>
+        public static readonly WzPresenceFlag PickUpDrop = new("publicReward");
+        public static readonly WzPresenceFlag HideHP = new("hideHP");
+        public static readonly WzPresenceFlag HideName = new("hideName");
+        public static readonly WzPresenceFlag HideLevel = new("hideLevel");
+        public static readonly WzPresenceFlag AngerGauge = new("angerGauge");
+
+        /// <summary>
+        /// Nonzero → HP gauge hidden (boss overlap indicator). WZ key confirmed as <c>"HPgaugeHide"</c>
+        /// (capital HP prefix, C++ field <c>bHPGaugeHide</c>). Earlier code used all-lowercase <c>"hpGaugeHide"</c>.
+        /// </summary>
+        public static readonly WzPresenceFlag HPGaugeHide = new("HPgaugeHide");
+        public static readonly WzPresenceFlag OnlyNormalAttack = new("onlyNormalAttack");
+        public static readonly WzPresenceFlag CantPassByTeleport = new("cantPassByTeleport");
+        public static readonly WzPresenceFlag CannotEvade = new("cannotEvade");
+        public static readonly WzPresenceFlag UpperMostLayer = new("upperMostLayer");
+
+        // ── Recovery / Fixed damage ──────────────────────────────
+        public static readonly WzProperty<int> HPRecovery = new("hpRecovery", 0);
+        public static readonly WzProperty<int> MPRecovery = new("mpRecovery", 0);
+        public static readonly WzProperty<int> FixedDamage = new("fixedDamage", 0);
+
+        // ── Metadata (nullable-int: non-zero = present) ──────────
+        /// <summary>WZ key "mbookID" (PDB literal L"mbookID"). Overrides Monster Book entry ID.</summary>
+        public static readonly WzProperty<int> MonsterBook = new("mbookID", 0);
+        public static readonly WzProperty<int> Category = new("category", 0);
+
+        /// <summary>
+        /// WZ key "escort". Nonzero → nMoveAbility = 6 (Escort).
+        /// nMoveAbility is NOT a WZ field; it is computed from action-node presence at runtime.
+        /// </summary>
+        public static readonly WzProperty<int> Escort = new("escort", 0);
+        public static readonly WzProperty<int> ChaseSpeed = new("chaseSpeed", 0);
+
+        /// <summary>
+        /// Knockback force. WZ key confirmed as <c>"pushed"</c> (C++ field <c>nPushedDamage</c>) with default 1.
+        /// Earlier code incorrectly used key <c>"pushedDamage"</c>.
+        /// </summary>
+        public static readonly WzProperty<int> PushedDamage = new("pushed", 1);
+        public static readonly WzProperty<int> Weapon = new("weapon", 0);
+
+        /// <summary>
+        /// Traction / friction coefficient. WZ key confirmed as <c>"fs"</c> (C++ field <c>nFs</c>,
+        /// stored as <c>long double</c> in the V95 PDB — schema §1.1). Typed as float to correctly
+        /// read WZ float nodes; earlier code used <c>WzProperty&lt;int&gt;</c> which silently
+        /// returned 0 for any non-integer WZ value.
+        /// </summary>
+        public static readonly WzProperty<float> Fs = new("fs", 0f);
+        public static readonly WzProperty<int> HpTagColor = new("hpTagColor", 0);
+
+        /// <summary>
+        /// HP tag background ARGB color. WZ key confirmed as <c>"hpTagBgcolor"</c>
+        /// (SP <c>aHptagbgcolor</c>, C++ field <c>nHPTagBgColor</c>).
+        /// Note the lowercase 'c' in "color" — asymmetric with <c>hpTagColor</c> (schema §1.1).
+        /// Earlier code incorrectly used <c>"hpTagBgColor"</c> (uppercase C).
+        /// </summary>
+        public static readonly WzProperty<int> HpTagBgColor = new("hpTagBgcolor", 0);
+        public static readonly WzProperty<int> ChargeCount = new("chargeCount", 0);
+        public static readonly WzProperty<int> DropItemPeriod = new("dropItemPeriod", 0);
+
+        /// <summary>
+        /// Ban behavior after mob kills player. WZ key confirmed as <c>"ban"</c> (C++ field <c>nBanType</c>).
+        /// Earlier code incorrectly used key <c>"banType"</c>.
+        /// </summary>
+        public static readonly WzProperty<int> BanType = new("ban", 0);
+        public static readonly WzProperty<int> HitCount = new("hitCount", 0);
+        public static readonly WzProperty<int> DieCount = new("dieCount", 0);
+        public static readonly WzProperty<int> EscortType = new("escortType", 0);
+        public static readonly WzProperty<int> ChatBalloon = new("chatBalloon", 0);
+        public static readonly WzProperty<int> Type = new("type", 0);
+
+        // ── String properties ────────────────────────────────────
+        public static readonly WzProperty<string?> ElemAttr = new("elemAttr", null);
+
+        /// <summary>
+        /// Species string stored in WZ (e.g. <c>"beast"</c>, <c>"dragon"</c>, <c>"undead"</c>, <c>"etc"</c>).
+        /// The V95 client converts this string to a <c>MOBSPECIES_*</c> int via
+        /// <c>get_mobspecies_code_from_name()</c>. Default is <c>"etc"</c> (fallback/catch-all).
+        /// Note: earlier code had this typed as WzProperty&lt;int&gt; — wrong because WZ stores a string.
+        /// </summary>
+        public static readonly WzProperty<string?> Species = new("species", "etc");
+
+        // ── Child node names (for list-valued children) ──────────
+        public const string ElemBonus = "elemBonus";
+        public const string Revive = "revive";
+
+        // Catalog §1.1 ✅ PDB-confirmed WZ keys
+        public static readonly WzPresenceFlag NoRegen = new("noregen");
+        public static readonly WzProperty<int> FixedBodyAttackDamR = new("fixedBodyAttackDamR", 0);
+
+        /// <summary>
+        /// WZ key confirmed as <c>"damagedByMob"</c> (C++ field <c>m_aDamagedBySelectedMob</c>).
+        /// Earlier code incorrectly used the C++ field name suffix <c>"damagedBySelectedMob"</c>.
+        /// </summary>
+        public const string DamagedBySelectedMob = "damagedByMob";
+
+        /// <summary>
+        /// WZ key confirmed as <c>"damagedBySkill"</c> (C++ field <c>m_aDamagedBySelectedSkill</c>).
+        /// Earlier code incorrectly used the C++ field name suffix <c>"damagedBySelectedSkill"</c>.
+        /// </summary>
+        public const string DamagedBySelectedSkill = "damagedBySkill";
+    }
+
+    /// <summary>Properties under Mob.wz/{id}.img/attack{N}/info/</summary>
+    public static class Attack
+    {
+        public static readonly WzProperty<int> PADamage = new("PADamage", 0);
+        public static readonly WzProperty<int> ConMP = new("conMP", 0);
+        public static readonly WzProperty<int> ElemAttr = new("elemAttr", 0);
+        public static readonly WzProperty<int> MPBurn = new("mpBurn", 0);
+        public static readonly WzProperty<int> Type = new("type", 0);
+        public static readonly WzProperty<int> BulletNumber = new("bulletNumber", 0);
+        public static readonly WzProperty<int> BulletSpeed = new("bulletSpeed", 0);
+        public static readonly WzProperty<int> EffectAfter = new("effectAfter", 0);
+        public static readonly WzProperty<int> AttackAfter = new("attackAfter", 0);
+        public static readonly WzProperty<int> RandDelayAttack = new("randDelayAttack", 0);
+        public static readonly WzPresenceFlag Magic = new("magic");
+        public static readonly WzPresenceFlag Deadly = new("deadly");
+        public static readonly WzPresenceFlag KnockBack = new("knockBack");
+        public static readonly WzPresenceFlag Tremble = new("tremble");
+        public static readonly WzPresenceFlag DoFirst = new("doFirst");
+        public static readonly WzPresenceFlag Rush = new("rush");
+
+        /// <summary>PDB-verified intentional WZ typo: "speicalAttack".</summary>
+        public static readonly WzPresenceFlag SpeicalAttack = new("speicalAttack");
+        public static readonly WzPresenceFlag Inactive = new("inactive");
+        public static readonly WzPresenceFlag JumpAttack = new("jumpAttack");
+
+        // Range sub-node
+        public const string Range = "range";
+        public const string Lt = "lt";
+        public const string Rb = "rb";
+
+        // UOL animation paths (string children on attack{N}/info/)
+        public const string EffectUol = "effect";
+        public const string BallUol = "ball";
+
+        /// <summary>
+        /// Area-warning effect UOL played before the attack fires to signal the danger zone.
+        /// WZ key confirmed as <c>"areaWarning"</c> (schema §1.2, PDB ✅ MobAttackInfo::<c>sAreaWarning</c>).
+        /// </summary>
+        public const string AreaWarningUol = "areaWarning";
+
+        // Hit sub-node (hit/hitAttach and hit/facingAttatch are read from the hit/ child)
+        public const string Hit = "hit";
+        public static readonly WzPresenceFlag HitAttach = new("hitAttach");
+
+        /// <summary>PDB-verified intentional WZ typo: "facingAttatch".</summary>
+        public static readonly WzPresenceFlag FacingAttatch = new("facingAttatch");
+    }
+
+    /// <summary>Properties under Mob.wz/{id}.img/skill{N}/</summary>
+    public static class Skill
+    {
+        public static readonly WzProperty<int> SkillId = new("skill", 0);
+        public static readonly WzProperty<int> Level = new("level", 1);
+        public static readonly WzProperty<int> EffectAfter = new("effectAfter", 0);
+        public static readonly WzProperty<int> CoolTime = new("cooltime", 0);
+    }
+
+    /// <summary>Properties under Mob.wz/{id}.img/speak/{N}/</summary>
+    public static class Speak
+    {
+        public const string NodeName = "speak";
+        public const string ConditionNode = "condition";
+        public const string QuestNode = "quest";
+        public const string StateNode = "state";
+        public const string PetNode = "pet";
+
+        public static readonly WzProperty<int> Action = new("action", 0);
+
+        /// <summary>HP% threshold to trigger this speak entry. Default 50 (schema §1.4, C++ field nHP).</summary>
+        public static readonly WzProperty<int> Hp = new("hp", WzDefaults.MobSpeakHpDefault);
+
+        /// <summary>MP threshold to trigger this speak entry. Default 0 (schema §1.4, C++ field nMP).</summary>
+        public static readonly WzProperty<int> Mp = new("mp", WzDefaults.MobSpeakMpDefault);
+        public static readonly WzProperty<int> Prob = new("prob", WzDefaults.DefaultPercent);
+
+        /// <summary>Chat balloon width in pixels. Default 150 per schema §1.4 (C++ field <c>nWidth</c>).</summary>
+        public static readonly WzProperty<int> Width = new("width", 150);
+    }
+
+    /// <summary>Named child keys within a mob animation frame node.</summary>
+    public static class Frame
+    {
+        /// <summary>Sound-effect node (maps to <c>Sound.wz</c> path).</summary>
+        public const string Sfx = "sSfx";
+
+        /// <summary>Body collision rectangle sub-node.</summary>
+        public const string Body = "body";
+
+        /// <summary>Head attachment point (for HP bar placement).</summary>
+        public const string Head = "head";
+
+        /// <summary>Frame delay in milliseconds (default: 120).</summary>
+        public static readonly WzProperty<int> Delay = new("delay", WzDefaults.DefaultMobFrameDelay);
+
+        /// <summary>
+        /// Explicit left-top corner of the body rect.
+        /// When absent, fall back to canvas origin + dimensions.
+        /// </summary>
+        public const string Lt = "lt";
+
+        /// <summary>
+        /// Explicit right-bottom corner of the body rect.
+        /// When absent, fall back to canvas origin + dimensions.
+        /// </summary>
+        public const string Rb = "rb";
+    }
+
+    /// <summary>Drop table properties under Etc.wz/RewardItem.img/{mobId}/{N}/</summary>
+    public static class Drop
+    {
+        public static readonly WzProperty<int> Item = new("item", 0);
+        public static readonly WzProperty<int> Min = new("min", 1);
+        public static readonly WzProperty<int> Max = new("max", 1);
+        public static readonly WzProperty<int> Prop = new("prop", 0);
+    }
+}

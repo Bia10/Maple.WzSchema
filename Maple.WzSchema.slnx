@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="src/Maple.WzSchema/Maple.WzSchema.csproj" />
+  <Project Path="src/Maple.WzSchema.Test/Maple.WzSchema.Test.csproj" />
+  <Project Path="src/Maple.WzSchema.DocTest/Maple.WzSchema.DocTest.csproj" />
+  <Project Path="src/Maple.WzSchema.Benchmarks/Maple.WzSchema.Benchmarks.csproj" />
+  <Project Path="src/Maple.WzSchema.ComparisonBenchmarks/Maple.WzSchema.ComparisonBenchmarks.csproj" />
+  <Project Path="src/Maple.WzSchema.Tester/Maple.WzSchema.Tester.csproj" />
+</Solution>
