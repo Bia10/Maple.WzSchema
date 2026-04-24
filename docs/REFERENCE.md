@@ -18,6 +18,60 @@ notable implementation decisions.
 
 ---
 
+## Archived source-comment notes
+
+The source files now keep comments focused on present code behavior, live WZ
+quirks, and usage constraints. Reverse-engineering provenance, historical
+corrections, and pseudocode metadata that previously appeared inline are
+archived here instead.
+
+### Moved provenance by file
+
+- `WzDefaults.cs`: mob skill and mob speak defaults were originally annotated
+  with schema and PDB defaults; the source now keeps only the runtime default
+  values.
+- `CharacterCodes.cs`: slot indices and the previously noted V95 slot-clearing
+  quirks came from the avatar compositing reverse-engineering pass.
+- `EtcKeys.cs`: Morph and TamingMob comments previously carried `game_types.h`
+  anchors and registration-function references. The remaining source comments
+  keep only movability semantics and field purpose.
+- `ItemKeys.cs`: item `unitPrice`, throwing-star `incPAD`, and pet ability flag
+  comments previously embedded SP offsets and field-name provenance. Those
+  lookup notes now belong here.
+- `MapKeys.cs`: `forbiddenSkill`, `swimArea`, `ReduceHP`, and healer `ymin`
+  comments previously carried catalog sections and binary-source references.
+- `MobKeys.cs`: the following key confirmations and prior-name corrections were
+  removed from inline comments and retained as reference data here:
+  `publicReward` over `pickUpDrop`, `HPgaugeHide` exact casing, `mbookID`,
+  `escort`, `pushed` over `pushedDamage`, `fs` as floating-point data,
+  `hpTagBgcolor` exact casing, `ban` over `banType`, `damagedByMob`,
+  `damagedBySkill`, and the `areaWarning` attack UOL.
+- `MobSkillKeys.cs`: archived name/provenance notes for `hp`, `time`,
+  `randomtarget`, and `nEffect`, including prior aliases that were called out
+  in source comments.
+- `PhysicsKeys.cs`: archived the engine-field provenance for the physics key
+  names; source comments now only describe the live WZ key meaning.
+- `ReactorKeys.cs`: archived the catalog and engine-model references for
+  `quest`, `timeout`, event type `"0"`, and event `state` transitions.
+- `SkillKeys.cs`: archived provenance for `skillLVData`, `prepare/time`,
+  `ball/delay`, `defaultMasterLev`, `mob`, `delay`, and `hold`, along with the
+  associated pseudocode notes.
+- `CharacterKeys.cs`, `EquipKeys.cs`, and `UiKeys.cs`: archived PDB/path-source
+  references that were only documenting discovery, not present behavior.
+
+### WZ quirks intentionally kept in source
+
+These remain in source comments because they describe the live archive shape,
+not the research trail:
+
+- `MobKeys.Attack.SpeicalAttack = "speicalAttack"`
+- `MobKeys.Attack.FacingAttatch = "facingAttatch"`
+- `EtcKeys.ItemCrafting.ReqSkillProbability = "reqSkillProbility"`
+- Truncated keys such as `defaultMasterLev`, `hpincratioonmo`,
+  `mpincratioonmo`, `hpchangepertim`, and `mpchangepertim`
+
+---
+
 ## Two resolution APIs
 
 This package is consumed by two codebases with different resolution styles.
