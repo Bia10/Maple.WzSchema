@@ -1,4 +1,4 @@
-using Maple.StrongId;
+﻿using Maple.StrongId;
 
 namespace Maple.WzSchema;
 

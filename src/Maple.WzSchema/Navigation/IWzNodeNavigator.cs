@@ -1,4 +1,4 @@
-using Duey.Abstractions;
+﻿using Duey.Abstractions;
 
 namespace Maple.WzSchema;
 

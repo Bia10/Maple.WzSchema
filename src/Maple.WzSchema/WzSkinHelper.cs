@@ -1,4 +1,4 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
 /// <summary>
 /// Arithmetic helpers for skin template ID derivation.

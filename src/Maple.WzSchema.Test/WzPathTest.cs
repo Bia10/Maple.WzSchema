@@ -1,4 +1,4 @@
-namespace Maple.WzSchema.Test;
+﻿namespace Maple.WzSchema.Test;
 
 public class WzPathTest
 {

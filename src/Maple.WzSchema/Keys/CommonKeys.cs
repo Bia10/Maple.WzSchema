@@ -1,4 +1,4 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
 /// <summary>
 /// WZ node key strings that appear across multiple domains.

@@ -1,4 +1,4 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
 /// <summary>
 /// A WZ property that represents an integer boolean flag: node absent-or-zero = false, nonzero = true.

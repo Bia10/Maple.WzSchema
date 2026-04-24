@@ -1,4 +1,4 @@
-#pragma warning disable CA2007 // ConfigureAwait
+﻿#pragma warning disable CA2007 // ConfigureAwait
 #pragma warning disable CA1822 // Mark as static
 
 using System;
