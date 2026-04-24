@@ -1,4 +1,4 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
 /// <summary>
 /// WZ node key strings for the Map domain (String.wz / Map.wz).
@@ -58,7 +58,7 @@ public static class MapKeys
         public const string Width = "width";
         public const string Height = "height";
 
-        /// <summary>Bitmap canvas node within the miniMap sub-node (RE-confirmed §9.9).</summary>
+        /// <summary>Bitmap canvas node within the miniMap sub-node.</summary>
         public const string Canvas = "canvas";
     }
 
@@ -76,12 +76,10 @@ public static class MapKeys
     public const string AllowedItemNode = "allowedItem";
     public const string AllowedItemNodeAlt = "allowedItemList";
 
-    // Catalog §5.1 ✅ PDB-confirmed WZ key (info/forbiddenSkill/, C++ m_siForbiddenSkill)
     public const string ForbidSkillNode = "forbiddenSkill";
     public const string ForbidSkillNodeAlt = "forbidSkill";
     public const string ForbidSkillNodeAlt2 = "forbidSkills";
 
-    // Catalog §5.1A ✅ PDB-confirmed WZ key (swimArea/{N}, C++ m_aSwimRect)
     public const string SwimRectNode = "swimArea";
     public const string SwimRectNodeAlt = "swimRect";
     public const string AutoLieDetectorNode = "autoLieDetector";
@@ -134,8 +132,8 @@ public static class MapKeys
         public const string RecoveryAlt = "recoveryRate";
 
         /// <summary>
-        /// PDB-confirmed WZ key for HP reduction per tick on hazard maps (schema §5.1, C++ field <c>m_nReduceHPAmount</c>).
-        /// Use with all alt spellings via <c>ResolveIntOrStringFirst</c>.
+        /// Hazard-map HP reduction key.
+        /// Use with all alternate spellings via <c>ResolveIntOrStringFirst</c>.
         /// </summary>
         public const string ReduceHpPdb = "ReduceHP";
         public const string DecHp = "decHP";
@@ -174,7 +172,6 @@ public static class MapKeys
         public const string MobCapacityMax = "mobCapacityMax";
         public const string ViewMobLevel = "viewMobLevel";
 
-        // Catalog §5.1 ✅ PDB-confirmed WZ keys
         public const string MapMark = "mapMark";
         public const string Phase = "phase";
         public const string PhaseAlpha = "phaseAlpha";
@@ -198,7 +195,6 @@ public static class MapKeys
         public const string Force = "force";
         public const string Piece = "piece";
 
-        // Catalog §5.3 ✅ PDB-confirmed WZ keys
         public const string Drag = "drag";
         public const string Walk = "walk";
         public const string ForbidFallDown = "forbidFallDown";
@@ -259,7 +255,7 @@ public static class MapKeys
     // ── Ladder/rope entry props ───────────────────────────────────────────────
     public static class LadderRope
     {
-        /// <summary>Horizontal position of the vertical climb line (V95 RE confirmed: single <c>x</c> field, not <c>x1</c>/<c>x2</c>).</summary>
+        /// <summary>Horizontal position of the vertical climb line.</summary>
         public const string X = "x";
         public const string Y1 = "y1";
         public const string Y2 = "y2";
@@ -424,13 +420,13 @@ public static class MapKeys
 
     // ── Swim rect props ───────────────────────────────────────────────────────
     /// <summary>
-    /// Keys used within each swimArea/{N}/ child node.
+    /// Keys used within each <c>swimArea/{N}/</c> child node.
     /// <list type="bullet">
-    ///   <item><c>Lt</c> / <c>Rb</c> — WZ vector point nodes (preferred; PDB CField::LoadSwimArea uses these).</item>
-    ///   <item><c>L/T/R/B</c> — individual int children, present in some WZ revisions.</item>
-    ///   <item><c>X/Y</c> — centre-point variant used by a small number of maps.</item>
+    ///   <item><c>Lt</c> / <c>Rb</c> are the preferred vector point nodes.</item>
+    ///   <item><c>L/T/R/B</c> appear as individual integer children in some revisions.</item>
+    ///   <item><c>X/Y</c> appear as a centre-point variant in a small number of maps.</item>
     /// </list>
-    /// Callers should try <c>Lt</c>/<c>Rb</c> first, fall back to <c>L/T/R/B</c>.
+    /// Callers should try <c>Lt</c>/<c>Rb</c> first, then fall back to <c>L/T/R/B</c>.
     /// </summary>
     public static class SwimRect
     {
@@ -470,10 +466,7 @@ public static class MapKeys
     {
         public const string X = "x";
 
-        /// <summary>
-        /// WZ key confirmed as <c>"ymin"</c> (PDB-verified from <c>CField_GuildBoss::Init</c>).
-        /// Earlier revisions of the schema catalog listed <c>"y"</c>.
-        /// </summary>
+        /// <summary>Vertical position field. This node uses <c>"ymin"</c>.</summary>
         public const string Y = "ymin";
     }
 

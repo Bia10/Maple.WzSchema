@@ -1,4 +1,4 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
 /// <summary>
 /// WZ node key strings for the Equip domain (Character.wz / Item.wz equip sections).
@@ -132,21 +132,21 @@ public static class EquipKeys
     public const string SfxAlt = "sSfx";
 
     /// <summary>
-    /// Character.wz animation override node name keys (catalog §6.4).
+    /// Character.wz animation override node name keys.
     /// These WZ keys name animation sub-nodes inside a weapon's Character.wz img node,
     /// and are distinct from the Item.wz stat fields that may share the same string value.
     /// </summary>
     public static class Animation
     {
-        /// <summary>Walk animation override node (WZ key "nWalk"; C++ field nWalk).</summary>
+        /// <summary>Walk animation override node.</summary>
         public const string Walk = "nWalk";
         public const string WalkAlt = "walk";
 
-        /// <summary>Stand animation override node. WZ key is "move" (SP 0x42B); the C++ field name is nStand — the WZ key is NOT "nStand".</summary>
+        /// <summary>Stand animation override node. WZ uses <c>"move"</c> here, not <c>"nStand"</c>.</summary>
         public const string Stand = "move";
         public const string StandAlt = "nStand";
 
-        /// <summary>Attack animation override node. WZ key is "attack" (SP 0x1A9E); the C++ field name is nAttack — the WZ key is NOT "nAttack".</summary>
+        /// <summary>Attack animation override node. WZ uses <c>"attack"</c> here, not <c>"nAttack"</c>.</summary>
         public const string Attack = "attack";
         public const string AttackAlt = "nAttack";
 
@@ -161,10 +161,10 @@ public static class EquipKeys
         public const string Ice = "nirIce";
         public const string Fire = "nirFire";
         public const string Lightning = "nirLight";
-        public const string Holy = "nirHoly"; // V95 EQUIPITEM: exactly 5 nir* fields (SP 0x1305–0x1309); no nirDark
+        public const string Holy = "nirHoly"; // WZ exposes five nir* fields; there is no nirDark
     }
 
-    // ── Addition sub-nodes (§4.1B — epic equip bonuses) ──────────────────────
+    // ── Addition sub-nodes ───────────────────────────────────────────────────
     public static class Addition
     {
         public const string Node = "addition";
@@ -205,14 +205,14 @@ public static class EquipKeys
         public const string MpIncOnMobDie = "mpinconmobdie";
         public const string HpProp = "hpprop";
         public const string MpProp = "mpprop";
-        public const string HpIncRatioOnMobDie = "hpincratioonmo"; // WZ-truncated literal (14-char WZ string limit); C++ field nHPincRatioOnMobDie
-        public const string MpIncRatioOnMobDie = "mpincratioonmo"; // WZ-truncated literal (14-char WZ string limit); C++ field nMPincRatioOnMobDie
+        public const string HpIncRatioOnMobDie = "hpincratioonmo"; // WZ-truncated literal due to the 14-character key limit
+        public const string MpIncRatioOnMobDie = "mpincratioonmo"; // WZ-truncated literal due to the 14-character key limit
         public const string HpRatioProp = "hpratioprop";
         public const string MpRatioProp = "mpratioprop";
 
         // HpMpChange payload
-        public const string HpChangePerTime = "hpchangepertim"; // WZ-truncated literal (14-char WZ string limit); C++ field nHPchangePerTime
-        public const string MpChangePerTime = "mpchangepertim"; // WZ-truncated literal (14-char WZ string limit); C++ field nMPchangePerTime
+        public const string HpChangePerTime = "hpchangepertim"; // WZ-truncated literal due to the 14-character key limit
+        public const string MpChangePerTime = "mpchangepertim"; // WZ-truncated literal due to the 14-character key limit
     }
 
     // ── Skill sub-nodes ───────────────────────────────────────────────────────

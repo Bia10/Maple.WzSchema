@@ -1,4 +1,4 @@
-using System.Collections.Frozen;
+﻿using System.Collections.Frozen;
 
 namespace Maple.WzSchema;
 
@@ -177,7 +177,6 @@ public static class CharacterKeys
     // ── Extended action set (client compositing / rendering) ──────────────────
     /// <summary>
     /// Extended character animation action keys used by compositing and avatar loaders.
-    /// Includes all combat/movement actions from the PDB symbol table.
     /// For admin-panel preview poses, see <see cref="Action"/>.
     /// </summary>
     public static class Actions
@@ -235,10 +234,8 @@ public static class CharacterKeys
 
     // ── Z-order table ─────────────────────────────────────────────────────────
     /// <summary>
-    /// Canonical z-order string table — 36 entries (index 0 = furthest back).
-    /// Source: PDB-verified <c>m_aZMapKey[]</c> from <c>CCharacterLook</c>.
-    /// Z &lt; <see cref="FaceZIndex"/> → <c>pCanvasUnderFace</c>;
-    /// Z &gt;= <see cref="FaceZIndex"/> → <c>pCanvasOverFace</c>.
+    /// Canonical z-order string table with 36 entries (index <c>0</c> is furthest back).
+    /// Z &lt; <see cref="FaceZIndex"/> goes under the face split; Z &gt;= <see cref="FaceZIndex"/> goes over it.
     /// </summary>
     public static readonly string[] ZOrderTable =
     [

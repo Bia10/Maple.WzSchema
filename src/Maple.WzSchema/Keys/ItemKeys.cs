@@ -1,4 +1,4 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
 /// <summary>
 /// WZ node key strings for the Item domain (String.wz / Item.wz bundle sections).
@@ -72,8 +72,8 @@ public static class ItemKeys
     public const string Price = "price";
 
     /// <summary>
-    /// Per-unit sell price for stackable bundle items (WZ key confirmed: SP 0x95E; C++ field <c>dSellUnitPrice</c>).
-    /// A double value; 0.0 means use <see cref="Price"/> as the flat sell price instead.
+    /// Per-unit sell price for stackable bundle items.
+    /// A value of <c>0.0</c> means use <see cref="Price"/> as the flat sell price instead.
     /// </summary>
     public const string UnitPrice = "unitPrice";
 
@@ -108,7 +108,7 @@ public static class ItemKeys
     public const string MpQUpper = "MPQ";
 
     public const string Pdd = "pdd";
-    public const string Pad = "incPAD"; // SP 0x817 — PDB-confirmed WZ key for throwing star PAD
+    public const string Pad = "incPAD";
     public const string PadAlt = "PAD"; // fallback variant seen in some WZ dumps
 
     public const string Time = "time";
@@ -146,12 +146,12 @@ public static class ItemKeys
     public const string Couple = "couple";
     public const string IncLevel = "incLevel";
 
-    // Bundle-specific extension fields (§4.2 — CItemInfo::BUNDLEITEM)
+    // Bundle-specific extension fields
     public const string AppliableKarmaType = "appliableKarmaType";
     public static readonly WzPresenceFlag NoCancelMouse = new("noCancelMouse");
-    public static readonly WzPresenceFlag BigSize = new("bigSize"); // SP 0xDFA — big display flag
-    public static readonly WzPresenceFlag ExpireOnLogout = new("expireOnLogout"); // SP 0xE2B
-    public static readonly WzPresenceFlag TimeLimited = new("timeLimited"); // SP 0xB7D
+    public static readonly WzPresenceFlag BigSize = new("bigSize");
+    public static readonly WzPresenceFlag ExpireOnLogout = new("expireOnLogout");
+    public static readonly WzPresenceFlag TimeLimited = new("timeLimited");
     public const string ReplaceItemId = "replaceItemID";
     public const string ReplaceItemIdAlt = "replaceItem";
     public const string ReplaceMsg = "replaceMsg";
@@ -186,25 +186,24 @@ public static class ItemKeys
         public const string MpR = "mpR";
         public const string AreaBuffType = "areaBuffType";
 
-        // Base-stat bonuses from buff/elixir items (§4.3 — same key names as equip inc* fields)
+        // Base-stat bonuses from buff/elixir items
         public const string IncStr = "incSTR";
         public const string IncDex = "incDEX";
         public const string IncInt = "incINT";
         public const string IncLuk = "incLUK";
     }
 
-    // ── Pet ability flags (§4.4 — CPetTemplate.RegisterPet) ──────────────────
-    // Keys inferred from PDB field naming; interactbyuser is a confirmed literal.
-    public const string PickUpItem = "pickUpItem"; // SP 0xC38 ⚠️ bPickUpItem
-    public const string ConsumeHp = "consumeHP"; // SP 0xC3B ⚠️ bConsumeHP
-    public const string ConsumeMp = "consumeMP"; // SP 0xC3C ⚠️ bConsumeMP
-    public const string SweepForDrop = "sweepForDrop"; // SP 0xC3D ⚠️ bSweepForDrop
-    public const string LongRange = "longRange"; // SP 0xC3F ⚠️ bLongRange
-    public const string IgnorePickup = "ignorePickup"; // SP 0xC40 ⚠️ bIgnorePickup
-    public const string PetRecall = "recall"; // SP 0x1301 ⚠️ bRecall
-    public const string AutoSpeaking = "autoSpeaking"; // SP 0x1A9F ⚠️ bAutoSpeaking
-    public const string AutoReact = "autoReact"; // SP 0x1303 ⚠️ bAutoReact
-    public const string InteractByUser = "interactbyuser"; // literal ✅ bInterActByUserAction
+    // ── Pet ability flags ────────────────────────────────────────────────────
+    public const string PickUpItem = "pickUpItem";
+    public const string ConsumeHp = "consumeHP";
+    public const string ConsumeMp = "consumeMP";
+    public const string SweepForDrop = "sweepForDrop";
+    public const string LongRange = "longRange";
+    public const string IgnorePickup = "ignorePickup";
+    public const string PetRecall = "recall";
+    public const string AutoSpeaking = "autoSpeaking";
+    public const string AutoReact = "autoReact";
+    public const string InteractByUser = "interactbyuser";
 
     // ── Lottery / reward sub-node ─────────────────────────────────────────────
     public static class Lottery

@@ -1,4 +1,4 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
 /// <summary>
 /// WZ node key strings for the Skill domain (String.wz / Skill.wz).
@@ -25,9 +25,8 @@ public static class SkillKeys
     public const string PsdSkill = "psdSkill";
 
     /// <summary>
-    /// WZ key <c>"skillLVData"</c>; C++ field <c>bSkillLVData</c> (SP 5748). PDB-confirmed ✅.
     /// Nonzero indicates per-level stat lookups use the level-data system rather than inline
-    /// formula evaluation. Catalog §3.1.
+    /// formula evaluation.
     /// </summary>
     public static readonly WzProperty<int> SkillLvData = new("skillLVData", 0);
 
@@ -35,10 +34,8 @@ public static class SkillKeys
     public const string SkillType = "skillType";
     public const string SkillTypeAlt = "type";
 
-    // Element code strings — both map to nAttackElemAttr (catalog §3.1, §3.9 Phase 6).
-    // WZ stores a single character: F/I/L/S/H/D/U/"0". "elemAttr" is the primary V95 key
-    // (SP 1669); "element" is the archive-documented alternative. There is no "attackElemAttr"
-    // key in V95 WZ — removed. AttackElemAttr on the model is derived from the element string.
+    // Element code strings. WZ stores a single character: F/I/L/S/H/D/U/"0".
+    // AttackElemAttr on the model is derived from this string value.
     public const string ElemAttr = "elemAttr";
     public const string Element = "element";
 
@@ -47,38 +44,30 @@ public static class SkillKeys
     public const string PrepareAction = "prepareAction";
 
     /// <summary>
-    /// WZ sub-node name "prepare" at skill root. Contains action name (→ nPrepareAction) and
-    /// "time" sub-key (→ tPrepare). PDB-verified: SP 0x1AC8 obtains this node from skill root.
-    /// Do NOT read as a flat info/ key — navigate skillRoot/prepare/time for tPrepare.
+    /// WZ sub-node name at skill root. Contains the prepare action name and its <c>time</c> sub-key.
+    /// Do not read it as a flat info key.
     /// </summary>
     public const string PrepareNode = "prepare";
 
-    /// <summary>
-    /// WZ key "time" within the prepare/ sub-node (→ SKILLENTRY.tPrepare, SP 2403).
-    /// PDB-verified: <c>game_pseudocode.c:664337</c>.
-    /// </summary>
+    /// <summary>WZ key <c>"time"</c> within the <c>prepare/</c> sub-node.</summary>
     public const string PrepareTimeKey = "time";
 
     /// <summary>
-    /// WZ sub-node name "ball" at skill root. Contains "delay" sub-key (→ tBallDelay).
-    /// PDB-verified: SP 0x43F obtains this node; SP 6825 ("delay") reads tBallDelay.
-    /// Do NOT read as a flat info/ key "ballDelay" — navigate skillRoot/ball/delay.
+    /// WZ sub-node name at skill root. Contains the projectile timing data, including <c>delay</c>.
+    /// Do not read it as a flat info key.
     /// </summary>
     public const string BallNode = "ball";
 
-    /// <summary>
-    /// WZ key "defaultMasterLev" for nDefaultMasterLev (SP 0x1AC0). PDB-verified.
-    /// Note the truncated spelling — NOT "defaultMasterLevel" (full word).
-    /// </summary>
+    /// <summary>Default master level key. Note the truncated spelling: <c>defaultMasterLev</c>.</summary>
     public const string DefaultMasterLevel = "defaultMasterLev";
 
-    /// <summary>WZ key "mob" for dwMobCode (SP 0x14F9). PDB-verified.</summary>
+    /// <summary>WZ key for the referenced mob template code.</summary>
     public const string MobCode = "mob";
 
-    /// <summary>Literal WZ key "delay" for nDelayFrame (default -1). PDB-verified (SP 0xB553AC, literal "delay").</summary>
+    /// <summary>Frame delay key. Default is <c>-1</c>.</summary>
     public const string DelayFrame = "delay";
 
-    /// <summary>Literal WZ key "hold" for nHoldFrame (default -1). PDB-verified (literal "hold").</summary>
+    /// <summary>Frame hold key. Default is <c>-1</c>.</summary>
     public const string HoldFrame = "hold";
     public const string Speed = "speed";
     public const string ItemConsume = "itemConsume";
@@ -115,8 +104,8 @@ public static class SkillKeys
 
     // ── Common formula node ───────────────────────────────────────────────
     /// <summary>
-    /// WZ sub-node containing 81 formula strings evaluated per level (e.g. "x*5+100").
-    /// Each child name matches a stat field in SKILLLEVELDATACommon (V95 PDB-verified).
+    /// WZ sub-node containing formula strings evaluated per level (for example <c>"x*5+100"</c>).
+    /// Each child name matches a per-level stat field.
     /// </summary>
     public const string CommonNode = "common";
 
@@ -155,7 +144,7 @@ public static class SkillKeys
         public const string Level = "level";
     }
 
-    // ── Passive stat offset sub-nodes (§3.6 — psdSkill/) ─────────────────────
+    // ── Passive stat offset sub-nodes ────────────────────────────────────────
     public static class AdditionPsd
     {
         public const string Cr = "cr";
@@ -167,7 +156,7 @@ public static class SkillKeys
         public const string ImpR = "impR";
     }
 
-    // ── Animation sub-nodes (§3.5, §3.11 — UOL paths & icons) ──────────────
+    // ── Animation sub-nodes ─────────────────────────────────────────────────
     public static class Animation
     {
         public const string Effect = "effect";
@@ -207,10 +196,9 @@ public static class SkillKeys
         public const string Disabled = "iconDisabled";
     }
 
-    // ── Formula field names (SKILLLEVELDATACommon, V95 PDB-verified) ──────────
+    // ── Formula field names ──────────────────────────────────────────────────
     /// <summary>
     /// Field names inside <c>common/</c> (formula strings) and <c>level/{N}/</c> (evaluated values).
-    /// 81 fields in <c>SKILLLEVELDATACommon</c> per RE-05.
     /// </summary>
     public static class Formula
     {

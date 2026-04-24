@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Maple.WzSchema;
 
@@ -29,18 +29,18 @@ public static class WzDefaults
     /// </summary>
     public const int MobSpeedOffset = 100;
 
-    // Mob skill level data defaults (PDB-confirmed)
-    /// <summary>Default HP% threshold for mob skill activation (schema §1.5, C++ default = 50).</summary>
+    // Mob skill defaults
+    /// <summary>Default HP% threshold for mob skill activation.</summary>
     public const int MobSkillHpBelowDefault = 50;
 
-    /// <summary>Default max-targets for mob skills (-1 = unlimited, schema §1.5 C++ field nTargetUserCount).</summary>
+    /// <summary>Default max-target count for mob skills. <c>-1</c> means unlimited.</summary>
     public const int MobSkillUnlimitedTargets = -1;
 
-    // Mob speak defaults (PDB-confirmed, schema §1.4)
-    /// <summary>Default HP% threshold for mob speak activation (schema §1.4, C++ field nHP = 50).</summary>
+    // Mob speak defaults
+    /// <summary>Default HP% threshold for mob speak activation.</summary>
     public const int MobSpeakHpDefault = 50;
 
-    /// <summary>Default MP threshold for mob speak activation (schema §1.4, C++ field nMP = 0).</summary>
+    /// <summary>Default MP threshold for mob speak activation.</summary>
     public const int MobSpeakMpDefault = 0;
 
     // Speak/probability defaults

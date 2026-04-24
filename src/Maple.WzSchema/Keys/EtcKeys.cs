@@ -1,4 +1,4 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
 /// <summary>
 /// WZ node key strings for the Etc.wz miscellaneous data archive.
@@ -38,19 +38,19 @@ public static class EtcKeys
 
     // ── Morph.wz/{morphId}.img — root-level action node keys and info/ stat keys ─
     /// <summary>
-    /// Keys for Morph.wz/{morphId}.img (CMorphTemplate, game_types.h:41225).
-    /// Root-level <c>JumpNode</c>/<c>FlyNode</c> presence drives <c>nMovability</c>:
-    /// 0 = jump only, 1 = fly only, 2 = both (PDB-verified derivation in RegisterMorph).
+    /// Keys for <c>Morph.wz/{morphId}.img</c>.
+    /// Root-level <c>JumpNode</c>/<c>FlyNode</c> presence drives movability:
+    /// <c>0</c> = jump only, <c>1</c> = fly only, <c>2</c> = both.
     /// </summary>
     public static class Morph
     {
         public const string InfoNode = CommonKeys.Info;
         public const string Name = CommonKeys.Name;
 
-        /// <summary>Root-level action sub-node whose presence indicates jump capability (SP 6844 in RegisterMorph).</summary>
+        /// <summary>Root-level action sub-node whose presence indicates jump capability.</summary>
         public const string JumpNode = "nJump";
 
-        /// <summary>Root-level action sub-node whose presence indicates fly capability (SP 6833 in RegisterMorph).</summary>
+        /// <summary>Root-level action sub-node whose presence indicates fly capability.</summary>
         public const string FlyNode = "nFly";
 
         public static readonly WzProperty<int> Speed = new("nSpeed", 0);
@@ -65,9 +65,8 @@ public static class EtcKeys
 
     // ── TamingMob.wz/{tamingMobId}.img/info/ field keys ──────────────────────
     /// <summary>
-    /// Keys for TamingMob.wz/{id:D7}.img/info/ (CTamingMobTemplate, game_types.h:61725).
-    /// Stat keys are identical to <see cref="Morph"/> info/ keys except Fatigue replaces
-    /// the bool flags. Speed clamp: 80–190; Jump clamp: ≤123 (PDB-confirmed RegisterTamingMob).
+    /// Keys for <c>TamingMob.wz/{id:D7}.img/info/</c>.
+    /// Stat keys mirror <see cref="Morph"/> info keys, except <see cref="Fatigue"/> replaces the boolean flags.
     /// </summary>
     public static class TamingMobTemplate
     {
@@ -79,7 +78,7 @@ public static class EtcKeys
         public static readonly WzProperty<float> Fs = new("dFs", 1.0f);
         public static readonly WzProperty<int> Swim = new("nSwim", 0);
 
-        /// <summary>Mount fatigue/stamina field (nFatigue). SP 3342 in RegisterTamingMob.</summary>
+        /// <summary>Mount fatigue / stamina field.</summary>
         public static readonly WzProperty<int> Fatigue = new("nFatigue", 0);
     }
 

@@ -1,9 +1,6 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
-/// <summary>
-/// WZ node key constants for <c>UI.wz</c> node navigation across all UI loaders.
-/// Source: PDB-verified symbol names and RE-confirmed paths.
-/// </summary>
+/// <summary>WZ node key constants for <c>UI.wz</c> node navigation across all UI loaders.</summary>
 public static class UiKeys
 {
     // ── Common WZ canvas conventions ──────────────────────────────────────────

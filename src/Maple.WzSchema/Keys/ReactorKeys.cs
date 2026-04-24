@@ -1,4 +1,4 @@
-namespace Maple.WzSchema;
+﻿namespace Maple.WzSchema;
 
 /// <summary>
 /// WZ property descriptors for Reactor.wz/{id:D7}.img/ nodes.
@@ -10,8 +10,7 @@ public static class ReactorKeys
     public const string Root = "Reactor";
     public const string RootImg = "Reactor.img";
 
-    // Root-level key (NOT under info/): required active quest ID to interact with reactor.
-    // Catalog §10 ✅ SP-verified literal "quest" — CReactorTemplate.m_nQuestID
+    // Root-level key (not under info/): required active quest ID to interact with the reactor.
     public static readonly WzProperty<int> QuestId = new("quest", 0);
 
     /// <summary>Properties under Reactor.wz/{id}.img/info/</summary>
@@ -45,9 +44,8 @@ public static class ReactorKeys
         public static readonly WzPresenceFlag Repeat = new("repeat");
 
         /// <summary>
-        /// Auto-transition timeout (ms). If nonzero, the state automatically triggers the
-        /// next-state event after this many ms without a player interaction.
-        /// WZ key <c>"timeout"</c>; C++ field <c>nTimeOut</c>. Catalog §10.2 ✅ PDB-confirmed.
+        /// Auto-transition timeout in milliseconds.
+        /// If nonzero, the state automatically triggers the next-state event after this delay.
         /// </summary>
         public static readonly WzProperty<int> Timeout = new("timeout", 0);
 
@@ -60,21 +58,16 @@ public static class ReactorKeys
     /// </summary>
     public static class Event
     {
-        /// <summary>Integer key <c>"0"</c> — the event's trigger type (PDB: nType). Catalog §10.3 ✅.</summary>
+        /// <summary>Integer key <c>"0"</c> for the event's trigger type.</summary>
         public static readonly WzProperty<int> Type = new("0", 0);
 
-        /// <summary>
-        /// Archive target state index this event transitions to.
-        /// WZ key confirmed as <c>"state"</c> (catalog §10.3). Not retained in V95 REACTOREVENTINFO
-        /// (server manages state transitions), but present in the WZ archive and read by admin tooling.
-        /// Earlier revisions of this file incorrectly used <c>"stateNo"</c>.
-        /// </summary>
+        /// <summary>Archive target state index this event transitions to. Uses the WZ key <c>"state"</c>.</summary>
         public static readonly WzProperty<int> NextState = new("state", 0);
         public const string ActiveSkillId = "activeSkillID";
 
         // ── Hit area — WZ point nodes 'lt' and 'rb' at event node level ──
-        // Catalog §10.3: lt = top-left point, rb = bottom-right point
-        // Resolved via ResolveVector() → (x, y)
+        // lt = top-left point, rb = bottom-right point
+        // Resolved via ResolveVector() -> (x, y)
         public const string CheckRectLt = "lt";
         public const string CheckRectRb = "rb";
 
@@ -94,10 +87,10 @@ public static class ReactorKeys
         public const string Origin = CommonKeys.Origin;
         public static readonly WzProperty<int> Z = new("z", 0);
 
-        /// <summary>Alpha at frame start (0–255). Default <c>−1</c> = no effect. Catalog §10.2 ✅.</summary>
+        /// <summary>Alpha at frame start (0-255). Default <c>-1</c> means no effect.</summary>
         public static readonly WzProperty<int> A0 = new("a0", -1);
 
-        /// <summary>Alpha at frame end (0–255). Default <c>−1</c> = no effect. Catalog §10.2 ✅.</summary>
+        /// <summary>Alpha at frame end (0-255). Default <c>-1</c> means no effect.</summary>
         public static readonly WzProperty<int> A1 = new("a1", -1);
     }
 }
