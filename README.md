@@ -1,4 +1,4 @@
-# Maple.WzSchema
+﻿# Maple.WzSchema
 
 ![.NET](https://img.shields.io/badge/net10.0-5C2D91?logo=.NET&labelColor=gray)
 ![C#](https://img.shields.io/badge/C%23-14-239120?labelColor=gray)
@@ -16,7 +16,10 @@ MapleStory WZ archive schema constants, node-key definitions, and path navigatio
 ## Example
 
 ```csharp
-// Example code will be auto-populated from ReadMeTest.cs by tests
+// Use WzPath to build type-safe WZ paths from StrongId values
+var mobId = new Maple.StrongId.MobTemplateId(100100);
+var path = WzPath.MobImg(mobId);
+await Assert.That(path).IsEqualTo("0100100.img");
 ```
 
 For more examples see [Example Catalogue](#example-catalogue).
@@ -40,7 +43,10 @@ The following examples are available in [ReadMeTest.cs](src/Maple.WzSchema.DocTe
 ### Example - Empty
 
 ```csharp
-// Example code will be auto-populated from ReadMeTest.cs by tests
+// Use WzPath to build type-safe WZ paths from StrongId values
+var mobId = new Maple.StrongId.MobTemplateId(100100);
+var path = WzPath.MobImg(mobId);
+await Assert.That(path).IsEqualTo("0100100.img");
 ```
 
 ## Public API Reference
